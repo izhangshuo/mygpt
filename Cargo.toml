@@ -4,3 +4,8 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+burn = { version = "0.16", features = ["wgpu", "train"] }
+bincode = "=2.0.0-rc.3"
+bincode_derive = "=2.0.0-rc.3"
+
+rand = "0.9"
