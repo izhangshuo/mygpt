@@ -17,17 +17,11 @@ use crate::{batching::TokenPairBatcher, dataset::TokenPairDataset, modeling::Big
 pub struct TrainingConfig {
     pub model: BigramModelConfig,
     pub optimizer: AdamConfig,
-    #[config(default = 10)]
     pub num_epochs: usize,
-    #[config(default = 4)]
     pub batch_size: usize,
-    #[config(default = 8)]
-    pub block_size: usize,
-    #[config(default = 20)]
     pub num_workers: usize,
     #[config(default = 42)]
     pub seed: u64,
-    #[config(default = 1.0e-3)]
     pub learning_rate: f64,
 }
 
@@ -53,7 +47,7 @@ pub fn train<B: AutodiffBackend>(
     let batcher = TokenPairBatcher::default();
     let (dataset_train, dataset_test) = TokenPairDataset::from_tokens(
         tokens, //
-        config.block_size,
+        config.model.block_size,
     );
 
     let dataloader_train = DataLoaderBuilder::new(batcher.clone())

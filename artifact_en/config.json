@@ -1,0 +1,22 @@
+{
+  "model": {
+    "vocab_size": 66,
+    "block_size": 256,
+    "n_embd": 384,
+    "n_heads": 6,
+    "n_layer": 6,
+    "dropout": 0.2
+  },
+  "optimizer": {
+    "weight_decay": null,
+    "grad_clipping": null,
+    "beta_1": 0.9,
+    "beta_2": 0.999,
+    "epsilon": 0.00001
+  },
+  "num_epochs": 1,
+  "batch_size": 64,
+  "num_workers": 20,
+  "learning_rate": 0.0003,
+  "seed": 42
+}
