@@ -1,5 +1,12 @@
 # 说明
 
+## 视频地址
+
+- **哔哩哔哩**
+  https://www.bilibili.com/video/BV1A2tnzSEsv
+- **Youtube**
+  https://youtu.be/q_zh0-NcW9M
+
 ## 模型列表
 
 - **artifact_en**  
