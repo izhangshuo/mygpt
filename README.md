@@ -9,16 +9,18 @@
 
 ## 模型列表
 
-- **artifact_en**  
-  - 说明：使用莎士比亚作品训练的模型  
+- **artifact_en**
+
+  - 说明：使用莎士比亚作品训练的模型
   - 文本文件：`input.txt`
 
-- **artifact_cn**  
-  - 说明：使用《西游记》训练的模型  
+- **artifact_cn**
+
+  - 说明：使用《西游记》训练的模型
   - 文本文件：`西游记.txt`
 
-- **artifact_4in1**  
-  - 说明：使用四大名著合集训练的模型  
+- **artifact_4in1**
+  - 说明：使用四大名著合集训练的模型
   - 文本文件：`4in1.txt`
 
 ## 使用方法
@@ -29,9 +31,13 @@
 
    ```rust
    let text = include_str!("4in1.txt");
-   
+
+   ```
+
+## 截图
+
+![本地图片](screenshot.png)
+
 ## 另外
-note文件中是我视频中画的图的原始文件，用Microsoft OneNote可以打开。另外note.mht文件是单一网页，没有安装OneNote的朋友可以直接看这个。
 
-
-
+note 文件中是我视频中画的图的原始文件，用 Microsoft OneNote 可以打开。另外 note.mht 文件是单一网页，没有安装 OneNote 的朋友可以直接看这个。
