@@ -1,43 +1,79 @@
-# 说明
+## 📘 mygpt — GPT Implementation in Rust using Burn
 
-## 视频地址
+A minimal GPT‑style model implemented in Rust using the Burn machine learning framework.
+This project demonstrates how to build and train a simple transformer language model from scratch. It includes both English and Chinese example models and provides training and inference code.
 
-- **哔哩哔哩**
-  https://www.bilibili.com/video/BV1A2tnzSEsv
-- **Youtube**
-  https://youtu.be/q_zh0-NcW9M
+## 🎥 Video Demonstrations
 
-## 模型列表
+You can also find full walkthrough videos:
 
-- **artifact_en**
+🌐 YouTube (Chinese): https://youtu.be/q_zh0-NcW9M
 
-  - 说明：使用莎士比亚作品训练的模型
-  - 文本文件：`input.txt`
+📺 Bilibili (Chinese): https://www.bilibili.com/video/BV1A2tnzSEsv
 
-- **artifact_cn**
+Feel free to watch them for setup, training, and usage guidance.
 
-  - 说明：使用《西游记》训练的模型
-  - 文本文件：`西游记.txt`
+## 🚀 How to Use
 
-- **artifact_4in1**
-  - 说明：使用四大名著合集训练的模型
-  - 文本文件：`4in1.txt`
+### 1. Choose a Dataset
 
-## 使用方法
+Copy one of the model folders under the root (artifact_en, artifact_cn, or artifact_4in1) to a folder named artifact.
 
-1. 将任意模型文件夹复制一份。
-2. 重命名为 `artifact`。
-3. 修改代码中的以下语句，将文件名替换为对应模型的文本文件名：
+Example:
 
-   ```rust
-   let text = include_str!("4in1.txt");
+```bash
+cp -r artifact_en artifact
+```
 
-   ```
+### 2. Modify Source File
 
-## 截图
+Open the source code in your editor, and replace the model file name inside the code:
 
-![本地图片](screenshot.png)
+```rust
+let text = include_str!("4in1.txt");
+```
 
-## 另外
+Replace "4in1.txt" with the filename you want to train on.
 
-note 文件中是我视频中画的图的原始文件，用 Microsoft OneNote 可以打开。另外 note.mht 文件是单一网页，没有安装 OneNote 的朋友可以直接看这个。
+### 3. Train or Inference
+
+Use cargo to train or generate text — just like any Rust project:
+
+```bash
+cargo run --release
+```
+
+The training script will train a simplified GPT model on the chosen dataset.
+After training, inference will generate text continuations.
+
+## 📌 Notes
+
+- This implementation is designed for education and experimentation, not state‑of‑the‑art performance.
+
+- The model and code are kept minimal and easy to understand.
+
+- Burn allows us to build and train neural networks fully in Rust.
+
+## 🧠 Why This Project
+
+This repository aims to:
+
+- Show how to structure transformer models in Rust using Burn
+
+- Provide training and inference examples for different language datasets
+
+- Help Rust/Burn users understand GPT architectures
+
+## 📸 Screenshots
+
+![Inference Screenshot](screenshot.png)
+
+## 🗂 Additional Notes
+
+The `note` folder contains the original files of the diagrams used in the video. These can be opened with **Microsoft OneNote**.
+
+For users who do not have OneNote installed, you can view the diagrams in the `note.mht` file, which is a single web page.
+
+## 📝 License
+
+This project is licensed under MIT License.
