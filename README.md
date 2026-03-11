@@ -7,7 +7,7 @@ This project demonstrates how to build and train a simple transformer language m
 
 You can also find full walkthrough videos:
 
-🌐 YouTube (Chinese): https://youtu.be/q_zh0-NcW9M
+🌐 YouTube (Chinese): https://www.youtube.com/playlist?list=PL3lRZ4mOrPobeASemC7hvDfGc93a530gB
 
 📺 Bilibili (Chinese): https://www.bilibili.com/video/BV1A2tnzSEsv
 
