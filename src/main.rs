@@ -42,7 +42,7 @@ async fn main() {
     let device = WgpuDevice::default();
     let artifact_dir = "artifact";
 
-    let text = include_str!("4in1.txt");
+    let text = include_str!("input.txt");
     println!("text chars len: {}", text.chars().count());
 
     let tokenizer = Tokenizer::from_text(text);
@@ -86,7 +86,7 @@ async fn main() {
             config.model.init::<MyBackend>(&device).load_record(record)
         };
 
-    let stream = generate(&model, tokenizer.encode("大师兄"), 10000, &device);
+    let stream = generate(&model, tokenizer.encode("A"), 10000, &device);
     pin_mut!(stream); // needed for iteration
 
     while let Some(token) = stream.next().await {

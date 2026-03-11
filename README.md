@@ -66,7 +66,7 @@ This repository aims to:
 
 ## 📸 Screenshots
 
-![Inference Screenshot](screenshot.png)
+![Inference Screenshot](screenshot.gif)
 
 ## 🗂 Additional Notes
 
