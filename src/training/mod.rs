@@ -6,14 +6,14 @@ use burn::{
     record::CompactRecorder,
     tensor::backend::AutodiffBackend,
     train::{
-        LearnerBuilder,
+        Learner, SupervisedTraining,
         metric::{AccuracyMetric, LossMetric},
     },
 };
 
 use crate::{batching::TokenPairBatcher, dataset::TokenPairDataset, modeling::BigramModelConfig};
 
-#[derive(Config)]
+#[derive(Config, Debug)]
 pub struct TrainingConfig {
     pub model: BigramModelConfig,
     pub optimizer: AdamConfig,
@@ -42,7 +42,7 @@ pub fn train<B: AutodiffBackend>(
         .save(format!("{artifact_dir}/config.json"))
         .expect("Config should be saved successfully");
 
-    B::seed(config.seed);
+    B::seed(&device, config.seed);
 
     let batcher = TokenPairBatcher::default();
     let (dataset_train, dataset_test) = TokenPairDataset::from_tokens(
@@ -62,24 +62,26 @@ pub fn train<B: AutodiffBackend>(
         .num_workers(config.num_workers)
         .build(dataset_test);
 
-    let learner = LearnerBuilder::new(artifact_dir)
-        .metric_train_numeric(AccuracyMetric::new())
-        .metric_valid_numeric(AccuracyMetric::new())
-        .metric_train_numeric(LossMetric::new())
-        .metric_valid_numeric(LossMetric::new())
+    let training = SupervisedTraining::new(artifact_dir, dataloader_train, dataloader_test)
+        .metrics((AccuracyMetric::new(), LossMetric::new()))
         .with_file_checkpointer(CompactRecorder::new())
-        .devices(vec![device.clone()])
         .num_epochs(config.num_epochs)
-        .summary()
-        .build(
-            config.model.init::<B>(&device),
-            config.optimizer.init(),
-            config.learning_rate,
-        );
+        .summary();
+    // .build(
+    //     config.model.init::<B>(&device),
+    //     config.optimizer.init(),
+    //     config.learning_rate,
+    // );
 
-    let model_trained = learner.fit(dataloader_train, dataloader_test);
+    let model = config.model.init::<B>(&device);
+    let result = training.launch(Learner::new(
+        model,
+        config.optimizer.init(),
+        config.learning_rate,
+    ));
 
-    model_trained
+    result
+        .model
         .save_file(format!("{artifact_dir}/model"), &CompactRecorder::new())
         .expect("Trained model should be saved successfully");
 }

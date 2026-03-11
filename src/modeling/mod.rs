@@ -7,7 +7,7 @@ use burn::{
     },
     prelude::Backend,
     tensor::{Int, Tensor, activation::softmax, backend::AutodiffBackend},
-    train::{ClassificationOutput, TrainOutput, TrainStep, ValidStep},
+    train::{ClassificationOutput, InferenceStep, TrainOutput, TrainStep},
 };
 
 use crate::batching::TokenPairBatch;
@@ -335,7 +335,10 @@ impl<B: Backend> BigramModel<B> {
     }
 }
 
-impl<B: AutodiffBackend> TrainStep<TokenPairBatch<B>, ClassificationOutput<B>> for BigramModel<B> {
+impl<B: AutodiffBackend> TrainStep for BigramModel<B> {
+    type Input = TokenPairBatch<B>;
+    type Output = ClassificationOutput<B>;
+
     fn step(&self, batch: TokenPairBatch<B>) -> burn::train::TrainOutput<ClassificationOutput<B>> {
         let item = self.forward_classification(batch.inputs, batch.targets);
 
@@ -343,7 +346,10 @@ impl<B: AutodiffBackend> TrainStep<TokenPairBatch<B>, ClassificationOutput<B>> f
     }
 }
 
-impl<B: Backend> ValidStep<TokenPairBatch<B>, ClassificationOutput<B>> for BigramModel<B> {
+impl<B: Backend> InferenceStep for BigramModel<B> {
+    type Input = TokenPairBatch<B>;
+    type Output = ClassificationOutput<B>;
+
     fn step(&self, batch: TokenPairBatch<B>) -> ClassificationOutput<B> {
         self.forward_classification(batch.inputs, batch.targets)
     }

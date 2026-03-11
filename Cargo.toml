@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-burn = { version = "0.17", features = ["wgpu", "train", "vision"] }
+burn = { version = "0.20.1", features = ["wgpu", "train", "vision"] }
 
 async-stream = "0.3"
 
